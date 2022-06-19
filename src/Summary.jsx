@@ -1,7 +1,7 @@
 import { Code, Table, Text, useMantineTheme } from "@mantine/core";
 import dayjs from "dayjs";
 
-const Summary = ({ subjects }) => {
+const Summary = ({ subjects = [] }) => {
   const theme = useMantineTheme();
   const flattenedSubjects = subjects
     .map(({ code, subject, time_slot, credit }) => {

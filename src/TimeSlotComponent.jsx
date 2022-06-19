@@ -1,9 +1,10 @@
 import { ActionIcon, Group, Text, Box, Button, Space } from "@mantine/core";
 import { useFieldArray } from "react-hook-form";
 import { Plus, Trash } from "tabler-icons-react";
-import FormInput from "./FormInput";
-import FormSelect from "./FormSelect";
-import FormTimeRangePicker from "./FormTimeRangePicker";
+import FormInput from "./components/FormInput";
+import FormSelect from "./components/FormSelect";
+import FormTimeRangePicker from "./components/FormTimeRangePicker";
+import { STUDY_TYPES, TIME_SLOT_TYPES } from "./Utils";
 export const timeSlotObj = {
   title: "",
   type: "",
@@ -12,19 +13,10 @@ export const timeSlotObj = {
   time: [null, null],
 };
 
-const STUDY_TYPES = ["Lecture", "Tutorial", "Practical"];
 
-const TIME_SLOT_TYPES = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-];
 
-const TimeSlotComponent = ({ control, subIndex }) => {
+const TimeSlotComponent = ({ subIndex }) => {
   const { fields, remove, append } = useFieldArray({
-    control,
     name: `subjects.${subIndex}.time_slot`,
   });
 
@@ -101,7 +93,6 @@ const TimeSlotComponent = ({ control, subIndex }) => {
               placeholder="Study Type"
               required
               data={STUDY_TYPES}
-              control={control}
               name={`subjects.${subIndex}.time_slot.${index}.type`}
             />
             <FormInput
@@ -119,7 +110,6 @@ const TimeSlotComponent = ({ control, subIndex }) => {
               placeholder="Pick one"
               required
               data={TIME_SLOT_TYPES}
-              control={control}
               name={`subjects.${subIndex}.time_slot.${index}.date`}
             />
             <FormTimeRangePicker
@@ -127,8 +117,12 @@ const TimeSlotComponent = ({ control, subIndex }) => {
               style={{
                 width: "20%",
               }}
-              control={control}
               name={`subjects.${subIndex}.time_slot.${index}.time`}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  handleAddTimeSlot();
+                }
+              }}
             />
             <ActionIcon
               color="red"

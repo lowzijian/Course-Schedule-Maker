@@ -2,12 +2,11 @@ import { TimeRangeInput } from "@mantine/dates";
 import { useController } from "react-hook-form";
 
 const FormTimeRangePicker = (props) => {
-  const { name, control, ...rest } = props;
+  const { name, ...rest } = props;
   const {
     field: { onChange, onBlur, value = [null, null], ref },
   } = useController({
     name,
-    control,
   });
 
   return (

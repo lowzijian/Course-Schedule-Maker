@@ -2,14 +2,13 @@ import { Select } from "@mantine/core";
 import { useController } from "react-hook-form";
 
 const FormSelect = (props) => {
-  const { name, control, ...rest } = props;
+  const { name, ...rest } = props;
   const {
     field: { onChange, onBlur, value, ref },
+    fieldState: { error = {} },
   } = useController({
     name,
-    control,
   });
-
   return (
     <Select
       {...rest}
@@ -17,6 +16,7 @@ const FormSelect = (props) => {
       onChange={(value) => onChange(value)}
       ref={ref}
       onBlur={onBlur}
+      error={error?.message}
     />
   );
 };

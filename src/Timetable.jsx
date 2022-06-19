@@ -1,11 +1,36 @@
 import { Box, Table, Text, useMantineTheme } from "@mantine/core";
 import dayjs from "dayjs";
+import { TIME_SLOT_TYPES } from "./Utils";
 
-const TimeTable = ({ subjects }) => {
+const TimeTable = ({ subjects = [] }) => {
   const theme = useMantineTheme();
-  const daysRows = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  const daysRows = TIME_SLOT_TYPES;
+
+  const flattenedSubjects = subjects
+    .map(({ code, subject, time_slot }) => {
+      return time_slot.map((time) => {
+        const start_time = dayjs(time.time[0]).format("HH:mm");
+        const end_time = dayjs(time.time[1]).format("HH:mm");
+        const interval =
+          dayjs(time.time[1]).diff(dayjs(time.time[0]), "minutes") / 60;
+        return {
+          ...time,
+          subject,
+          code,
+          start_time,
+          end_time,
+          interval,
+        };
+      });
+    })
+    .flat();
+
   //earliest start time
-  const startTime = 7;
+  const earliestStartTime = flattenedSubjects.reduce((acc, curr) => {
+    return dayjs(curr.time[0]).isBefore(dayjs(acc)) ? curr.time[0] : acc;
+  }, 7);
+
+  const startTime = earliestStartTime;
 
   const endTime = 20;
 
@@ -30,25 +55,6 @@ const TimeTable = ({ subjects }) => {
       hour12: false,
     });
   });
-
-  const flattenedSubjects = subjects
-    .map(({ code, subject, time_slot }) => {
-      return time_slot.map((time) => {
-        const start_time = dayjs(time.time[0]).format("HH:mm");
-        const end_time = dayjs(time.time[1]).format("HH:mm");
-        const interval =
-          dayjs(time.time[1]).diff(dayjs(time.time[0]), "minutes") / 60;
-        return {
-          ...time,
-          subject,
-          code,
-          start_time,
-          end_time,
-          interval,
-        };
-      });
-    })
-    .flat();
 
   const groupedTimeSlotsByDay = daysRows.reduce((acc, curr) => {
     const timeSlots = flattenedSubjects.filter(

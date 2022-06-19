@@ -1,5 +1,5 @@
 {
-  "name": "course-scheduler-planner",
+  "name": "course-schedule-maker",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,6 +20,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
+    "dev": "react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

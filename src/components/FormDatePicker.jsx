@@ -2,12 +2,11 @@ import { DatePicker } from "@mantine/dates";
 import { useController } from "react-hook-form";
 
 const FormDatePicker = (props) => {
-  const { name, control, ...rest } = props;
+  const { name, ...rest } = props;
   const {
     field: { onChange, onBlur, value, ref },
   } = useController({
     name,
-    control,
   });
 
   return (

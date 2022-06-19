@@ -1,6 +1,6 @@
 {
-  "short_name": "Course Scheduler planner",
-  "name": "Course Scheduler planner",
+  "short_name": "CSM",
+  "name": "Course Schedule Maker",
   "icons": [
     {
       "src": "favicon.svg",
@@ -13,6 +13,6 @@
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "author": "Jake Low",
-  "description": "A simple Course Scheduler planner for university students.",
+  "description": "A simple Course Schedule Maker for university students.",
   "version": "1.0.0"
 }
