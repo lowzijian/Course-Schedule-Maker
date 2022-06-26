@@ -1,5 +1,5 @@
 ### Project overview
-Allow university student to create a timetable according to the subjects they have taken during the semester , a better overview of all the classes of the week.
+Allow university student to create a timetable according to the subjects they have taken during the semester , a better overview of all the classes of the week. You can access it from here [link](https://course-schedule-maker.vercel.app/)
 
 ### Built with
 - Framework: [React.js](https://reactjs.org/)
